@@ -1,0 +1,9 @@
+apiVersion: v2
+name: baseline
+description: A Helm chart for Kubernetes
+icon: https://avatars.githubusercontent.com/u/80650201?s=48&v=4
+type: application
+sources:
+- https://github.com/hobops/helm-charts
+version: 0.1.0
+appVersion: "0.1.0"

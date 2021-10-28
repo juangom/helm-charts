@@ -1,0 +1,15 @@
+{{- if eq .Values.kind "PersistentVolumeClaim" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "baseline.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  {{- with .Values.accessModes }}
+  accessModes: {{- tpl (toYaml .) $ | nindent 2 }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.resources.requests.storage }}
+  storageClassName: {{ .Values.storageClassName }}
+{{- end }}

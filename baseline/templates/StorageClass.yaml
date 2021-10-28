@@ -1,0 +1,14 @@
+{{- if eq .Values.kind "StorageClass" }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ include "baseline.fullname" . }}
+provisioner: {{ .Values.provisioner }}
+allowVolumeExpansion: {{ .Values.allowVolumeExpansion }}
+{{- with .Values.allowedTopologies }}
+allowedTopologies:
+  {{- tpl (toYaml .) $ | nindent 0 }}
+{{- end }}
+parameters:
+  {{- toYaml .Values.parameters | nindent 2 }}
+{{- end }}

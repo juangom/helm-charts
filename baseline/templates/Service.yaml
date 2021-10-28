@@ -1,0 +1,23 @@
+{{- if .Values.service }}{{- if .Values.service.ports }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "baseline.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  {{- if .Values.service.type }}
+  type: {{ .Values.service.type }}
+  {{- end }}
+  ports:
+  {{- range $host := .Values.service.ports }}
+  - name: {{ .name }}
+    nodePort: {{ .nodePort }}
+    port: {{ .port }}
+    protocol: {{ .protocol }}
+    targetPort:  {{ .targetPort | default .port }}
+  {{- end }}
+  selector:
+    {{- with .Values.selectorLabels }}
+    {{- tpl (toYaml .) $ | nindent 4 }}
+    {{- end }}
+{{- end }}{{- end }}
