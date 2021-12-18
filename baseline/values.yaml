@@ -1,10 +1,6 @@
 kind: Deployment
 
-strategy:
-  type: RollingUpdate
-  rollingUpdate:
-    maxSurge: 2
-    maxUnavailable: 1
+strategy: {}
 
 labels: {}
 selectorLabels: {}
@@ -72,3 +68,6 @@ volumeClaimTemplates: {}
 data: {}
 
 stringData: {}
+
+# StatufulSet / DaemonSet
+updateStrategy: {}
