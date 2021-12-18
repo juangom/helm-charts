@@ -1,6 +1,6 @@
-{{- if eq .Values.kind "Deployment" }}
+{{- if eq .Values.kind "DaemonSet" }}
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: {{ include "baseline.fullname" . }}
   namespace: {{ .Release.Namespace }}
@@ -10,12 +10,9 @@ metadata:
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount | default 1 }}
-  {{- end }}
   progressDeadlineSeconds: {{ .Values.progressDeadlineSeconds }}
-  {{- with .Values.strategy }}
-  strategy:
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   selector:
