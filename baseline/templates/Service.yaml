@@ -1,12 +1,25 @@
-{{- if .Values.service }}{{- if .Values.service.ports }}
+{{- if or .Values.service (eq .Values.kind "Service") }}{{- if .Values.service.ports }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "baseline.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.serviceAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  {{- if .Values.service.type }}
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.type | default "ClusterIP" }}
+  {{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy | default "Cluster" }}
+  {{- end }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}
+  sessionAffinity: {{ .Values.service.sessionAffinity | default "None" }}
+  {{- with .Values.service.sessionAffinityConfig }}
+  sessionAffinityConfig:
+    {{- tpl (toYaml .) $ | nindent 4 }}
   {{- end }}
   ports:
   {{- range $host := .Values.service.ports }}

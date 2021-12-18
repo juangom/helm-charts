@@ -34,6 +34,19 @@ dependencies: # A list of the chart requirements (optional)
   version: "0.1.0"
   repository: https://hobops-helm-charts.storage.googleapis.com
   alias: example-frontend
+### Services
+- name: baseline
+  version: "0.1.0"
+  repository: https://hobops-helm-charts.storage.googleapis.com
+  alias: example-service-clusterip
+- name: baseline
+  version: "0.1.0"
+  repository: https://hobops-helm-charts.storage.googleapis.com
+  alias: example-service-nodeport
+- name: baseline
+  version: "0.1.0"
+  repository: https://hobops-helm-charts.storage.googleapis.com
+  alias: example-service-loadbalancer
 ### Ingress
 - name: baseline
   version: "0.1.0"
