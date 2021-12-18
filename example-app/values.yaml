@@ -20,7 +20,10 @@ example-config:
 example-secret:
   kind: Secret
   fullnameOverride: example-secret
-  stringData: {}
+  stringData:
+    FOO: bar
+#  data:
+#    FOO: YmFy
 
 ### Backends
 example-backend:
