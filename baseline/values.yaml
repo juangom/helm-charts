@@ -1,5 +1,4 @@
 kind: Deployment
-replicaCount: 1
 
 strategy:
   type: RollingUpdate
