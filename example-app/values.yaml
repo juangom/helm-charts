@@ -143,3 +143,19 @@ example-ingress:
               number: 80
         path: /
         pathType: ImplementationSpecific
+
+### StorageClass
+gcp-storage:
+  kind: StorageClass
+  fullnameOverride: gcp-storage
+  provisioner: kubernetes.io/gce-pd
+  allowVolumeExpansion: true
+  reclaimPolicy: Retain
+  parameters:
+    type: pd-standard
+  allowedTopologies:
+  - matchLabelExpressions:
+    - key: failure-domain.beta.kubernetes.io/zone
+      values:
+      - us-central1-a
+      - us-central1-b
