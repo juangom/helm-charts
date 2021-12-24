@@ -106,6 +106,57 @@ example-frontend:
       port: 80
       protocol: TCP
 
+### Services
+example-service-clusterip:
+  kind: Service
+  fullnameOverride: example-service-clusterip
+  selectorLabels:
+    app: example-backend
+  serviceAnnotations:
+    foo.bar: "helloworld"
+  service:
+    ports:
+    - name: nginx
+      port: 80
+      protocol: TCP
+example-service-nodeport:
+  kind: Service
+  fullnameOverride: example-service-nodeport
+  selectorLabels:
+    app: example-backend
+  serviceAnnotations:
+    foo.bar: "helloworld"
+  service:
+    type: NodePort
+    externalTrafficPolicy: Local
+    sessionAffinity: ClientIP
+    sessionAffinityConfig:
+      clientIP:
+        timeoutSeconds: 3600
+    ports:
+    - name: nginx
+      port: 80
+      protocol: TCP
+example-service-loadbalancer:
+  kind: Service
+  fullnameOverride: example-service-loadbalancer
+  selectorLabels:
+    app: example-backend
+  serviceAnnotations:
+    foo.bar: "helloworld"
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 1.1.1.1
+    externalTrafficPolicy: Local
+    sessionAffinity: ClientIP
+    sessionAffinityConfig:
+      clientIP:
+        timeoutSeconds: 3600
+    ports:
+    - name: nginx
+      port: 80
+      protocol: TCP
+
 ### Ingress
 example-ingress:
   kind: Ingress
