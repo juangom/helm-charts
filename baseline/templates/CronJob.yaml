@@ -1,0 +1,84 @@
+{{- if eq .Values.kind "CronJob" }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "baseline.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "baseline.labels" . | nindent 4 }}
+    {{- with .Values.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: {{ .Values.concurrencyPolicy | default "Forbid" }}
+  suspend: {{ .Values.suspend | default "false" }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.backoffLimit | default 1 }}
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "baseline.selectorLabels" . | nindent 12 }}
+            {{- with .Values.selectorLabels }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          serviceAccountName: {{ include "baseline.serviceAccountName" . }}
+          restartPolicy: {{ .Values.restartPolicy | default "Never" }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+          - name: {{ include "baseline.fullname" . }}
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 14 }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- with .Values.command }}
+            command: {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+            {{- with .Values.args }}
+            args: {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+            {{- with .Values.envFrom }}
+            envFrom: {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+            {{- with .Values.env }}
+            env: {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+            {{- with .Values.resources }}
+            resources:
+              {{- tpl (toYaml .) $ | nindent 14 }}
+            {{- end }}
+            {{- with .Values.volumeMounts }}
+            volumeMounts: {{- tpl (toYaml .) $ | nindent 12 }}
+            {{- end }}
+          {{- with .Values.volumes }}
+          volumes:
+            {{- tpl (toYaml .) $ | nindent 10 }}
+          {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.hostAliases }}
+          hostAliases:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+{{- end }}
