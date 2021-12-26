@@ -1,3 +1,6 @@
+global:
+  latest_upgrade: "2021-12-26 13:37"
+
 templates:
   defaults: &defaults
     replicaCount: 1
@@ -7,6 +10,8 @@ templates:
     - configMapRef:
         name: example-config
     env:
+    - name: LATEST_UPGRADE
+      value: "{{ .Values.global.latest_upgrade }}"
     - name: TEST_VAR
       value: "test_var"
 
