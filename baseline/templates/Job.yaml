@@ -7,7 +7,7 @@ metadata:
   labels:
     {{- include "baseline.labels" . | nindent 4 }}
     {{- with .Values.labels }}
-    {{- toYaml . | nindent 4 }}
+    {{- tpl (toYaml .) $ | nindent 4 }}
     {{- end }}
 spec:
   backoffLimit: {{ .Values.backoffLimit | default 1 }}
@@ -17,7 +17,7 @@ spec:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        {{- tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
       labels:
         {{- include "baseline.selectorLabels" . | nindent 8 }}
