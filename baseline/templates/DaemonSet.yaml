@@ -4,6 +4,10 @@ kind: DaemonSet
 metadata:
   name: {{ include "baseline.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.annotations }}
+  annotations:
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "baseline.labels" . | nindent 4 }}
     {{- with .Values.labels }}
