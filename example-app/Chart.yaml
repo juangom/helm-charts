@@ -54,7 +54,7 @@ dependencies: # A list of the chart requirements (optional)
   alias: example-ingress
 ### StorageClass
 - name: baseline
-  version: "0.1.0"
+  version: "0.1.1"
   repository: https://hobops-helm-charts.storage.googleapis.com
   alias: gcp-storage
 
