@@ -5,5 +5,5 @@ icon: https://avatars.githubusercontent.com/u/80650201?s=48&v=4
 type: application
 sources:
 - https://github.com/hobops/helm-charts
-version: 0.1.5
-appVersion: "0.1.5"
+version: 0.1.6
+appVersion: "0.1.6"
