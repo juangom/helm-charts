@@ -72,3 +72,7 @@ stringData: {}
 
 # StatufulSet / DaemonSet
 updateStrategy: {}
+
+# Ingress
+render_ingress_rules: false
+render_ingress_tls: false
