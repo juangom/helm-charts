@@ -9,6 +9,11 @@ metadata:
     {{- tpl (toYaml .) $ | nindent 4 }}
   {{- end }}
 spec:
+  {{- /* ingressClassName */ -}}
+  {{- if (hasKey .Values "ingressClassName") }}
+  ingressClassName: {{ .Values.ingressClassName }}
+  {{- end -}}
+
   {{- /* rules */ -}}
   {{- $env := .Values.paths -}}
   {{- if .Values.render_ingress_rules }}
