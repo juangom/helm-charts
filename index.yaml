@@ -3,7 +3,7 @@ entries:
   baseline:
   - apiVersion: v2
     appVersion: 0.1.9
-    created: "2022-07-11T15:21:03.860461832-05:00"
+    created: "2022-07-11T15:34:19.787630434-05:00"
     description: A Helm chart for Kubernetes
     digest: ca655272698d8e7ffa783afa940a2cdb77c7ef401b34e22bddac3f3e24375e2e
     icon: https://avatars.githubusercontent.com/u/80650201?s=48&v=4
@@ -16,7 +16,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2022-07-11T15:21:03.85921922-05:00"
+    created: "2022-07-11T15:34:19.787031315-05:00"
     description: A Helm chart for Kubernetes
     digest: 4b7e98fbe1b9050260a14001ddaf4d2899c18f9f5a68020231ee33815ea1aa37
     icon: https://avatars.githubusercontent.com/u/80650201?s=48&v=4
@@ -27,4 +27,4 @@ entries:
     urls:
     - https://juangom.github.io/helm-charts/baseline-0.1.8.tgz
     version: 0.1.8
-generated: "2022-07-11T15:21:03.857213991-05:00"
+generated: "2022-07-11T15:34:19.786261995-05:00"
