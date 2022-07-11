@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  baseline:
+  - apiVersion: v2
+    appVersion: 0.1.8
+    created: "2022-07-11T14:15:51.419743659-05:00"
+    description: A Helm chart for Kubernetes
+    digest: 4b7e98fbe1b9050260a14001ddaf4d2899c18f9f5a68020231ee33815ea1aa37
+    icon: https://avatars.githubusercontent.com/u/80650201?s=48&v=4
+    name: baseline
+    sources:
+    - https://github.com/hobops/helm-charts
+    type: application
+    urls:
+    - https://juangom.github.io/helm-charts/baseline-0.1.8.tgz
+    version: 0.1.8
+generated: "2022-07-11T14:15:51.417762936-05:00"
